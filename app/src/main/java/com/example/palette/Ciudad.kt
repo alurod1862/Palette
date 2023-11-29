@@ -1,4 +1,4 @@
-package com.example.palette.ui.theme
+package com.example.palette
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable

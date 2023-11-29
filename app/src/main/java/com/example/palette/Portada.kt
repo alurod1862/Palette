@@ -1,4 +1,4 @@
-package com.example.palette.ui.theme
+package com.example.palette
 
 import android.annotation.SuppressLint
 import android.graphics.BitmapFactory
@@ -11,16 +11,18 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FabPosition
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
@@ -36,8 +38,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import androidx.palette.graphics.Palette
-import com.example.palette.R
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -94,7 +98,7 @@ fun portada(navController: NavController) {
 
 
 
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "SuspiciousIndentation")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ciudadSeleccionada(nombreCiudad: String?) {
@@ -121,7 +125,9 @@ fun ciudadSeleccionada(nombreCiudad: String?) {
         Image(
             painter = painterResource(id = imagenId),
             contentDescription = "1",
-            modifier = Modifier.fillMaxWidth().weight(3f),
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(3f),
             contentScale = ContentScale.Crop,
         )
 
@@ -152,7 +158,8 @@ fun ciudadSeleccionada(nombreCiudad: String?) {
                 modifier = Modifier
                     .background(lightVibrant?.let { Color(it.rgb) }
                         ?: Color.Red)
-                    .fillMaxWidth().weight(1f),
+                    .fillMaxWidth()
+                    .weight(1f),
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -166,7 +173,8 @@ fun ciudadSeleccionada(nombreCiudad: String?) {
                 modifier = Modifier
                     .background(darkVibrant?.let { Color(it.rgb) }
                         ?: Color.Red)
-                    .fillMaxWidth().weight(1f),
+                    .fillMaxWidth()
+                    .weight(1f),
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -180,7 +188,8 @@ fun ciudadSeleccionada(nombreCiudad: String?) {
                 modifier = Modifier
                     .background(lightMuted?.let { Color(it.rgb) }
                         ?: Color.Red)
-                    .fillMaxWidth().weight(1f),
+                    .fillMaxWidth()
+                    .weight(1f),
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -194,7 +203,8 @@ fun ciudadSeleccionada(nombreCiudad: String?) {
                 modifier = Modifier
                     .background(muted?.let { Color(it.rgb) }
                         ?: Color.Red)
-                    .fillMaxWidth().weight(1f),
+                    .fillMaxWidth()
+                    .weight(1f),
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -208,7 +218,8 @@ fun ciudadSeleccionada(nombreCiudad: String?) {
                 modifier = Modifier
                     .background(darkMuted?.let { Color(it.rgb) }
                         ?: Color.Red)
-                    .fillMaxWidth().weight(1f),
+                    .fillMaxWidth()
+                    .weight(1f),
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -218,48 +229,9 @@ fun ciudadSeleccionada(nombreCiudad: String?) {
                 )
             }
         }
+
+
 }
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun MyTopAppBar(nombreCiudad: String?) {
-
-    val imagenId = when (nombreCiudad) {
-        "Muchisimas flores" -> R.drawable.image1
-        "Desierto" -> R.drawable.image2
-        "Flor" -> R.drawable.image3
-        "Medusa" -> R.drawable.image4
-        "Muchas Flores" -> R.drawable.image5
-        "Castilo" -> R.drawable.image6
-        "Pinguino" -> R.drawable.image7
-        "Flores" -> R.drawable.image8
-        else -> R.drawable.image1
-    }
-
-    val context = LocalContext.current
-
-    val bitmap = remember {
-        BitmapFactory.decodeResource(context.resources, imagenId)
-    }
-
-    val palette = remember {
-        Palette.from(bitmap).generate()
-    }
-
-        TopAppBar(
-        title = { Text(text = "Palette", color = Color.White) },
-        navigationIcon = {
-            IconButton(onClick = {/*TODO*/ }) {
-                Icon(Icons.Filled.List, null, tint = Color.White)
-            }
-        }, actions = {
-            IconButton(onClick = {}) {
-                Icon(Icons.Filled.MoreVert, null, tint = Color.White)
-            }
-        }, modifier = Modifier.background(palette.darkMutedSwatch?.let { Color(it.rgb) }
-                ?: Color.Red)
-        )
-    }
 
 
     

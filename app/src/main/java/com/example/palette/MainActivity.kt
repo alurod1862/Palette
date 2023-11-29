@@ -23,14 +23,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.palette.ui.theme.MyTopAppBar
 import com.example.palette.ui.theme.PaletteTheme
-import com.example.palette.ui.theme.ciudadSeleccionada
-import com.example.palette.ui.theme.portada
 
 
 class MainActivity : ComponentActivity() {
-
     @OptIn(ExperimentalMaterial3Api::class)
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,12 +35,11 @@ class MainActivity : ComponentActivity() {
             PaletteTheme {
                 val navController = rememberNavController()
                 Scaffold(
-
-                    topBar = { MyTopAppBar("Ciudad/{nombreCiudad}") },
+                    topBar = { MyTopAppBar() },
                     floatingActionButton = {
                         FloatingActionButton(
                             onClick = {
-                                      navController.navigate("Portada")
+                                navController.navigate("Portada")
                             },
                             content = {
                                 Icon(Icons.Filled.ArrowBack, contentDescription = "Agregar")
@@ -68,3 +63,21 @@ class MainActivity : ComponentActivity() {
 
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun MyTopAppBar() {
+    TopAppBar(
+        title = { Text(text = "Palette", color = Color.White) },
+        navigationIcon = {
+            IconButton(onClick = {/*TODO*/ }) {
+                Icon(Icons.Filled.List, null, tint = Color.White)
+            }
+        },
+        actions = {
+            IconButton(onClick = {}) {
+                Icon(Icons.Filled.MoreVert, null, tint = Color.White)
+            }
+        },
+        modifier = Modifier.background(color = Color(0xFF005CB2))
+    )
+}
